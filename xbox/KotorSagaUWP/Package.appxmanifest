@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         IgnorableNamespaces="uap">
+  <Identity Name="KotorSaga.CP1D.PlatformProbe" Publisher="CN=KotorSagaDev" Version="0.1.3.0" />
+  <Properties>
+    <DisplayName>KOTOR Saga CP1D Render Probe</DisplayName>
+    <PublisherDisplayName>KOTOR Saga Developers</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.17763.0" MaxVersionTested="10.0.22621.0" />
+  </Dependencies>
+  <Resources><Resource Language="en-US" /></Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="KotorSaga.CP1D.PlatformProbe">
+      <uap:VisualElements DisplayName="KOTOR Saga CP1D"
+          Description="Native DirectX offscreen render test; no KOTOR gameplay"
+          BackgroundColor="#001008"
+          Square150x150Logo="Assets\Square150x150Logo.png"
+          Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+</Package>

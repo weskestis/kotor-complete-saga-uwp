@@ -1,0 +1,54 @@
+name: KOTOR Saga CP1D / Xbox UWP x64 package
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'xbox/**'
+      - 'src/**'
+      - 'ci/**'
+      - '.github/workflows/uwp-x64.yml'
+  pull_request:
+    paths:
+      - 'xbox/**'
+      - 'src/**'
+      - 'ci/**'
+      - '.github/workflows/uwp-x64.yml'
+permissions:
+  contents: read
+jobs:
+  native-uwp-x64:
+    runs-on: windows-2022
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v2
+      - name: Windows toolchain inventory
+        shell: pwsh
+        run: |
+          Write-Host "Runner: $env:RUNNER_OS"
+          Get-Command msbuild.exe | Select-Object Source
+          Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\Include" | Select-Object Name
+      - name: Compile, sign, and verify UWP x64 package
+        shell: pwsh
+        run: ./ci/build-uwp.ps1 -Configuration Release -Platform x64
+      - name: Save development APPX and PUBLIC certificate
+        uses: actions/upload-artifact@v4
+        with:
+          name: KotorSaga-CP1D-Xbox-UWP-x64
+          path: |
+            appx-output/**/*.appx
+            appx-output/**/*.msix
+            appx-output/**/*.cer
+            appx-output/**/PACKAGE-READ-ME.txt
+          if-no-files-found: error
+          retention-days: 30
+      - name: Save diagnostic logs even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: KotorSaga-CP1D-Windows-Build-Logs
+          path: |
+            appx-output/**/*.binlog
+            appx-output/**/build-transcript.txt
+          if-no-files-found: warn
+          retention-days: 14
