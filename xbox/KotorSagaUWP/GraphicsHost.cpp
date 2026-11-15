@@ -40,7 +40,7 @@ void GraphicsHost::initialize(IUnknown* coreWindow) {
     desc.AlphaMode=DXGI_ALPHA_MODE_IGNORE;
     check(factory->CreateSwapChainForCoreWindow(device_.Get(),window_,&desc,nullptr,&swapChain_),"CreateSwapChainForCoreWindow");
     check(dxgiDevice->SetMaximumFrameLatency(1),"SetMaximumFrameLatency");
-    check(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED,&d2dFactory_),"D2D factory");
+    check(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, __uuidof(ID2D1Factory1), nullptr, reinterpret_cast<void**>(d2dFactory_.GetAddressOf())),"D2D factory");
     check(d2dFactory_->CreateDevice(dxgiDevice.Get(),&d2dDevice_),"D2D device");
     check(d2dDevice_->CreateDeviceContext(D2D1_DEVICE_CONTEXT_OPTIONS_NONE,&d2dContext_),"D2D context");
     check(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED,__uuidof(IDWriteFactory),
