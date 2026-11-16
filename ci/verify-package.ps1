@@ -9,9 +9,9 @@ param(
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
-# Framework dependencies are delivered in nested *_Test/Dependencies folders.
-# Verify only the main application packages at the artifact root.
-$packages = @(Get-ChildItem -Path $PackageDir -File | Where-Object { $_.Extension -in @('.appx','.msix') })
+# MSBuild can place app and framework packages in nested versioned directories.
+# Verify KotorSaga packages recursively while excluding Microsoft.VCLibs dependencies.
+$packages = @(Get-ChildItem -Path $PackageDir -Recurse -File | Where-Object { $_.Extension -in @('.appx','.msix') -and $_.Name -like 'KotorSagaUWP_*' })
 if ($packages.Count -eq 0) { throw "No APPX/MSIX package under $PackageDir" }
 if ($packages.Count -gt 1) { Write-Warning 'More than one APPX found. Checking all.' }
 $expectedPublisher = 'CN=KotorSagaDev'
