@@ -4,13 +4,13 @@ A non-commercial experimental native Xbox Series X Developer Mode host for *Star
 
 ## Status — Checkpoint 1D handoff
 
-- Existing local CP1D source archive: `KOTOR_Complete_Saga_CP1D_Source.zip` (version 0.1.3).
+- CP1D version 0.1.3 source code is committed to this repository (`src/`, `xbox/`, `ci/`, `docs/`, `tests/`).
 - Rendering host: Direct3D 11 / x64 UWP proof of concept, **not** KOTOR gameplay.
 - Graphics menu target: 720p through 4K, frame cap up to 120 FPS. Actual performance not measured on Xbox.
-- Windows UWP compilation and Xbox deployment: **not yet verified**.
+- Windows C++ compilation: **confirmed on GitHub Actions**; package signing/deployment: under active verification. Xbox hardware testing: **not yet performed**.
 - No proprietary KOTOR game files included.
 
-The original CP1D archive was created in ChatGPT; it must be imported into this repository before native packaging can be verified. See [the import instructions](docs/IMPORT_CP1D.md).
+The CP1D source has been imported, including the original build scripts and sample imagery. The first CI runs exposed and helped fix a Direct2D factory compilation issue and missing UWP manifest metadata.
 
 ## Goals
 
@@ -21,7 +21,7 @@ The original CP1D archive was created in ChatGPT; it must be imported into this 
 
 ## CI
 
-The [UWP x64 build workflow](.github/workflows/uwp-x64.yml) builds the source when the archive is imported. The workflow reports an informative failure if the required solution has not yet been uploaded. This distinguishes a missing project from a compiler error.
+The [UWP x64 build workflow](.github/workflows/uwp-x64.yml) compiles, development-signs and verifies an Xbox UWP x64 package, then uploads build artifacts. Follow [GitHub Actions runs](https://github.com/weskestis/kotor-complete-saga-uwp/actions) for the current status. The Linux workflow independently validates the portable code. A successful build is not proof the package boots on an Xbox.
 
 ## Copyright and licensing
 
