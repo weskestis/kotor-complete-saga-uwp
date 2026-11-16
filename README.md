@@ -7,10 +7,10 @@ A non-commercial experimental native Xbox Series X Developer Mode host for *Star
 - CP1D version 0.1.3 source code is committed to this repository (`src/`, `xbox/`, `ci/`, `docs/`, `tests/`).
 - Rendering host: Direct3D 11 / x64 UWP proof of concept, **not** KOTOR gameplay.
 - Graphics menu target: 720p through 4K, frame cap up to 120 FPS. Actual performance not measured on Xbox.
-- Windows C++ compilation: **confirmed on GitHub Actions**; package signing/deployment: under active verification. Xbox hardware testing: **not yet performed**.
+- Windows UWP x64 compilation, development signing, and package verification: **passed on GitHub Actions** ([successful run](https://github.com/weskestis/kotor-complete-saga-uwp/actions/runs/43778112398)). Xbox installation and hardware performance: **not yet tested**.
 - No proprietary KOTOR game files included.
 
-The CP1D source has been imported, including the original build scripts and sample imagery. The first CI runs exposed and helped fix a Direct2D factory compilation issue and missing UWP manifest metadata.
+The CP1D source has been imported, including the original build scripts and sample imagery. The CI runs exposed and helped fix a Direct2D factory compilation issue, missing UWP manifest metadata, and package verification of framework dependencies. The successful CI artifact includes the MSIX, public development certificate and VCLibs dependencies.
 
 ## Goals
 
